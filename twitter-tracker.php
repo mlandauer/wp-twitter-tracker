@@ -55,11 +55,18 @@ class TwitterTracker extends TwitterTracker_Plugin
 
 		// register widget
 		add_action('widgets_init', create_function('', 'return register_widget( "TwitterTracker_Widget" );'));
+        
+        add_shortcode('twitter-tracker', array(&$this, 'shortcode'));
 	}
 	
 	// HOOKS
 	// =====
 	
+    public function shortcode($attrs)
+    {
+        return $this->show_intermediate(array('twitter_search' => $attrs['search'], 'max_tweets' => $attrs['max_tweets']));
+    }
+    
 	public function activate()
 	{
 		// Empty
@@ -102,13 +109,12 @@ class TwitterTracker extends TwitterTracker_Plugin
 			define( 'MAGPIE_CACHE_AGE', 60 * 15 ); // Fifteen of your Earth minutes
 	}
 	
-	public function show( $instance )
-	{
+    public function show_intermediate( $instance )
+    {
 		extract( $instance );
 		// Let the user know if there's no search query
 		if ( empty( $twitter_search ) ) {
-			$this->render( 'widget-error', array() );
-			return;
+			return ($this->capture( 'widget-error', array() ));
 		}
 		require_once( dirname( __FILE__ ) . '/model/twitter-search.php' );
 		require_once( dirname( __FILE__ ) . '/model/tweet.php' );
@@ -125,7 +131,12 @@ class TwitterTracker extends TwitterTracker_Plugin
 			'html_after' => $html_after
 			 );
 		$vars[ 'datef' ] = _c( 'M j, Y @ G:i|Publish box date format');
-		$this->render( 'widget-contents', $vars );
+		return ($this->capture( 'widget-contents', $vars ));
+    }
+    
+	public function show( $instance )
+	{
+        echo $this->show_intermediate($instance);
 	}
 
 	public function & get()
