@@ -4,7 +4,7 @@ Plugin Name: Twitter Tracker
 Plugin URI: http://simonwheatley.co.uk/wordpress/twitter-tracker
 Description: Tracks the search results on <a href="http://search.twitter.com/" target="_blank">Twitter search</a> in a sidebar widget.
 Author: Simon Wheatley
-Version: 2.12
+Version: 2.13 alpha
 Author URI: http://simonwheatley.co.uk/wordpress/
 */
 

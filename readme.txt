@@ -46,6 +46,9 @@ Right, that's it. Grump over. ;)
 
 == Change Log ==
 
+= v2.13 alpha 2010/10/28 =
+* ENHANCEMENT: Add support for Wordpress shortcode. e.g. [twitter-tracker search="foo OR bar" max_tweets=5]
+
 = v2.12 2009/10/27 =
 
 * ENHANCEMENT: Adds the ability to enter a local query for each individual page and post, this local query overrides the query entered on the widgets screen
